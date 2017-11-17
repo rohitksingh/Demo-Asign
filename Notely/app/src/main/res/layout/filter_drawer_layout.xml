@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/holo_red_dark"
+    >
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+    <include layout="@layout/filter_item"
+        android:id="@+id/all_filters"
+        />
+        <include layout="@layout/filter_item"
+            android:id="@+id/hearted"
+            />
+        <include layout="@layout/filter_item"
+            android:id="@+id/favorite"
+            />
+        <include layout="@layout/filter_item"
+            android:id="@+id/story"
+            />
+        <include layout="@layout/filter_item"
+            android:id="@+id/all_filters"
+            />
+    </LinearLayout>
+    <Button
+        android:id="@+id/applyFilter"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="APPLY"
+        android:layout_marginBottom="20dp"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+
+        />
+</RelativeLayout>

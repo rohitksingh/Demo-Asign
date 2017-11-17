@@ -1,0 +1,120 @@
+package rohksin.com.notely.Activities;
+
+import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
+import android.os.Bundle;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
+import android.view.Gravity;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.view.animation.TranslateAnimation;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import rohksin.com.notely.R;
+
+/**
+ * Created by Illuminati on 11/17/2017.
+ */
+
+public class NotelyListActivity extends AppCompatActivity{
+
+    private DrawerLayout drawerLayout;
+    private ActionBarDrawerToggle drawerToggle;
+    private TextView mainContent;
+    private RelativeLayout filterDrawer;
+
+    private float lastTranslate = 0.0f;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState)
+    {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.notely_list_activity);
+
+        Toolbar toolbar = (Toolbar)findViewById(R.id.notely_toolbar);
+        setSupportActionBar(toolbar);
+
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawer_layout);
+        drawerLayout.setScrimColor(Color.TRANSPARENT);
+        drawerLayout.setStatusBarBackgroundColor(Color.TRANSPARENT);
+
+        mainContent = (TextView) findViewById(R.id.mainContent);
+        filterDrawer = (RelativeLayout)findViewById(R.id.filterDrawer);
+
+
+
+        drawerToggle = new ActionBarDrawerToggle(this,drawerLayout,R.string.drawer_open,R.string.drawer_close){
+
+            @Override
+            public void onDrawerClosed(View view)
+            {
+                super.onDrawerClosed(view);
+                Toast.makeText(NotelyListActivity.this,"Drawer closed",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDrawerOpened(View view)
+            {
+                super.onDrawerOpened(view);
+                Toast.makeText(NotelyListActivity.this,"Drawer opened",Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onDrawerSlide(View view, float slideOffset)
+            {
+                super.onDrawerSlide(view,slideOffset);
+                float slideFactor =  filterDrawer.getWidth()*slideOffset;
+
+                TranslateAnimation anim = new TranslateAnimation( -lastTranslate,-slideFactor, 0.0f, 0.0f);
+                anim.setDuration(0);
+                anim.setFillAfter(true);
+                mainContent.startAnimation(anim);
+
+                lastTranslate = slideFactor;
+
+            }
+
+        };
+
+        drawerLayout.addDrawerListener(drawerToggle);
+
+    }
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu)
+    {
+        getMenuInflater().inflate(R.menu.notely_menu,menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item)
+    {
+
+        int id = item.getItemId();
+
+        if(id == R.id.filters)
+        {
+            Toast.makeText(NotelyListActivity.this,"This is filter",Toast.LENGTH_SHORT).show();
+            drawerLayout.openDrawer(Gravity.END);
+            return true;
+        }
+        else if(id == R.id.addNote)
+        {
+            startActivity(new Intent(NotelyListActivity.this, AddNewNoteActivity.class));
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
+
+}
