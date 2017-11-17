@@ -7,17 +7,27 @@ import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import rohksin.com.notely.Adapters.NotelyListAdapter;
+import rohksin.com.notely.Dummy;
+import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
 
 /**
@@ -28,8 +38,14 @@ public class NotelyListActivity extends AppCompatActivity{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
-    private TextView mainContent;
+
     private RelativeLayout filterDrawer;
+
+    private RecyclerView notelyList;
+    private LinearLayoutManager llm;
+    private NotelyListAdapter adapter;
+
+
 
     private float lastTranslate = 0.0f;
 
@@ -46,8 +62,21 @@ public class NotelyListActivity extends AppCompatActivity{
         drawerLayout.setScrimColor(Color.TRANSPARENT);
         drawerLayout.setStatusBarBackgroundColor(Color.TRANSPARENT);
 
-        mainContent = (TextView) findViewById(R.id.mainContent);
+
         filterDrawer = (RelativeLayout)findViewById(R.id.filterDrawer);
+
+        setUpFilters();
+
+
+        // Set up recycler View
+        notelyList = (RecyclerView)findViewById(R.id.notely_list);
+        llm = new LinearLayoutManager(NotelyListActivity.this);
+        notelyList.setLayoutManager(llm);
+
+        List<Note> notes = Dummy.getDummyNotes();
+        adapter = new NotelyListAdapter(NotelyListActivity.this,notes);
+        notelyList.setAdapter(adapter);
+        //
 
 
 
@@ -76,8 +105,7 @@ public class NotelyListActivity extends AppCompatActivity{
                 TranslateAnimation anim = new TranslateAnimation( -lastTranslate,-slideFactor, 0.0f, 0.0f);
                 anim.setDuration(0);
                 anim.setFillAfter(true);
-                mainContent.startAnimation(anim);
-
+                notelyList.startAnimation(anim);
                 lastTranslate = slideFactor;
 
             }
@@ -115,6 +143,37 @@ public class NotelyListActivity extends AppCompatActivity{
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+
+
+    public void setUpFilters()
+    {
+
+        setUpFilter(R.id.favorite, "Favorite");
+        setUpFilter(R.id.all_filters,"FILTERS");
+        setUpFilter(R.id.poem,"Poem");
+        setUpFilter(R.id.hearted,"Hearted");
+        setUpFilter(R.id.story,"Story");
+
+        Button applyFilterButton = (Button)findViewById(R.id.applyFilter);
+
+        applyFilterButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawer(Gravity.END);
+            }
+        });
+
+
+    }
+
+    public void setUpFilter(int id, String name)
+    {
+        Log.d("ID inside",R.id.favorite+"");
+        RelativeLayout allfilters = (RelativeLayout) findViewById(id);
+        TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
+        textView.setText(name);
     }
 
 }

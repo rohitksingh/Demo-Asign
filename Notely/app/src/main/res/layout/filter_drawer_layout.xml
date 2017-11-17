@@ -23,7 +23,7 @@
             android:id="@+id/story"
             />
         <include layout="@layout/filter_item"
-            android:id="@+id/all_filters"
+            android:id="@+id/poem"
             />
     </LinearLayout>
     <Button

@@ -24,15 +24,10 @@
         android:minHeight="?attr/actionBarSize"
         android:background="#ffffff" />
 
-        <TextView
-            android:id="@+id/mainContent"
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/notely_list"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="slkdslkdlsld"
-            android:layout_gravity="center"
-            android:textSize="30dp"
-            android:background="@color/colorAccent"
-            />
+            android:layout_height="wrap_content"/>
 
 </LinearLayout>
     <include layout="@layout/filter_drawer_layout"
