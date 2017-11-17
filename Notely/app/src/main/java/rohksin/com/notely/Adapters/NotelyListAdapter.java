@@ -1,6 +1,7 @@
 package rohksin.com.notely.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +10,7 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import rohksin.com.notely.Activities.NotelyDetailActivity;
 import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
 
@@ -20,6 +22,8 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
 
     private Context context;
     private List<Note> notes;
+
+    public static final String LIST_NOTE = "rohksin.com.notely.Adapters.LIST_NOTE";
 
 
     public NotelyListAdapter(Context context, List<Note> notes)
@@ -38,9 +42,19 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
     @Override
     public void onBindViewHolder(NotelyViewHolder holder, int position) {
 
-        Note note = notes.get(position);
+        final Note note = notes.get(position);
         holder.title.setText(note.getTitle());
         holder.gist.setText(note.getGist());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(context, NotelyDetailActivity.class);
+                intent.putExtra(LIST_NOTE,note);
+                context.startActivity(intent);
+            }
+        });
 
     }
 
