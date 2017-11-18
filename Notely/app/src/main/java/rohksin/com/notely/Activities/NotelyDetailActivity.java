@@ -26,6 +26,8 @@ public class NotelyDetailActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private TextView gist;
 
+    private Note note;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
@@ -43,7 +45,7 @@ public class NotelyDetailActivity extends AppCompatActivity {
         gist = (TextView)findViewById(R.id.mainGist);
 
         collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.title);
-        Note note = (Note)getIntent().getSerializableExtra(NotelyListAdapter.LIST_NOTE);
+        note = (Note)getIntent().getSerializableExtra(NotelyListAdapter.LIST_NOTE);
         collapsingToolbarLayout.setTitle(note.getTitle());
         gist.setText(note.getGist()+",mzx,mz,mx,zm,xm,zm");
         Log.d("NOTE", note.toString());
@@ -54,7 +56,7 @@ public class NotelyDetailActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
     {
-        getMenuInflater().inflate(R.menu.notely_menu,menu);
+        getMenuInflater().inflate(R.menu.detail_note_menu,menu);
         return true;
     }
 
@@ -69,6 +71,14 @@ public class NotelyDetailActivity extends AppCompatActivity {
         {
             onBackPressed();
         }
+        else if(id == R.id.edit)
+        {
+            Intent intent = new Intent(NotelyDetailActivity.this, AddNewNoteActivity.class);
+            intent.setAction(AppUtility.NOTE_ACTION);
+            intent.putExtra(AppUtility.NOTE_ITEM,note);
+            startActivity(intent);
+        }
+
 
         return super.onOptionsItemSelected(item);
     }
