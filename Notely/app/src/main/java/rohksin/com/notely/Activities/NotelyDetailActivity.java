@@ -6,15 +6,14 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
-import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import rohksin.com.notely.Adapters.NotelyListAdapter;
 import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
+import rohksin.com.notely.Utilities.AppUtility;
 
 /**
  * Created by Illuminati on 11/17/2017.

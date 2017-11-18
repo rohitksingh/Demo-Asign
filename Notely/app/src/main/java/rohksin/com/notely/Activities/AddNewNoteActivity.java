@@ -3,14 +3,16 @@ package rohksin.com.notely.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
+import rohksin.com.notely.Utilities.AppUtility;
+import rohksin.com.notely.Utilities.FileUtility;
 
 /**
  * Created by Illuminati on 11/17/2017.
@@ -67,6 +69,17 @@ public class AddNewNoteActivity extends AppCompatActivity {
         else if(id == R.id.save)
         {
             Toast.makeText(AddNewNoteActivity.this,"Save",Toast.LENGTH_SHORT).show();
+
+            note = new Note();
+
+            note.setTitle(title.getText()+"");
+            note.setGist(gist.getText()+"");
+
+            Log.d("File","Note "+note.getTitle());
+            Log.d("File","Note "+note.getGist());
+
+            FileUtility.createFile(title.getText()+"",note);
+
         }
         else if(id == R.id.undo)
         {

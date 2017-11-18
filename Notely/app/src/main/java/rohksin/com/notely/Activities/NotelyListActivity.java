@@ -22,13 +22,16 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import rohksin.com.notely.Adapters.NotelyListAdapter;
 import rohksin.com.notely.Dummy;
 import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
+import rohksin.com.notely.Utilities.FileUtility;
 
 /**
  * Created by Illuminati on 11/17/2017.
@@ -73,9 +76,22 @@ public class NotelyListActivity extends AppCompatActivity{
         llm = new LinearLayoutManager(NotelyListActivity.this);
         notelyList.setLayoutManager(llm);
 
-        List<Note> notes = Dummy.getDummyNotes();
+
+
+        List<Note> notes =  FileUtility.getAllNotes();          //Dummy.getDummyNotes();
+
+        if(notes==null)
+        {
+            Log.d("FILE","Empty");
+            notes = Dummy.getDummyNotes();
+        }
+
+        Log.d("FILE","Not Empty"+notes.size());
+
         adapter = new NotelyListAdapter(NotelyListActivity.this,notes);
         notelyList.setAdapter(adapter);
+
+
         //
 
 

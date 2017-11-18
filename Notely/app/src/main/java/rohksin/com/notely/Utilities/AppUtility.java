@@ -1,4 +1,4 @@
-package rohksin.com.notely.Activities;
+package rohksin.com.notely.Utilities;
 
 /**
  * Created by Illuminati on 11/18/2017.
