@@ -1,7 +1,9 @@
 package rohksin.com.notely.Adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,7 @@ import java.util.List;
 import rohksin.com.notely.Activities.NotelyDetailActivity;
 import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
+import rohksin.com.notely.Utilities.AppUtility;
 
 /**
  * Created by Illuminati on 11/17/2017.
@@ -53,7 +56,9 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
 
                 Intent intent = new Intent(context, NotelyDetailActivity.class);
                 intent.putExtra(LIST_NOTE,note);
-                context.startActivity(intent);
+                //context.startActivity(intent);
+                AppCompatActivity appCompatActivity = (AppCompatActivity)context;
+                appCompatActivity.startActivityForResult(intent, AppUtility.EDIT_NOTE_REQ_CODE);
             }
         });
 

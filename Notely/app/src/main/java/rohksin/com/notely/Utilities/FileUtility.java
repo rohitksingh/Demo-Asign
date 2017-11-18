@@ -11,6 +11,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 import rohksin.com.notely.Models.Note;
 
@@ -42,6 +43,8 @@ public class FileUtility {
         return context.getFilesDir().list();
     }
 
+
+    /*
     public static void  createFile(String fileName, Note note)
     {
         FileOutputStream fos = null;
@@ -81,12 +84,67 @@ public class FileUtility {
 
     }
 
+    */
+
+
+    public static void  createFile(Note note, String writeMode)
+    {
+        FileOutputStream fos = null;
+        ObjectOutputStream oos = null;
+
+        UUID uuid = null;
+        if(writeMode.equals(AppUtility.CREATE_NEW_FILE)) {
+             uuid = UUID.randomUUID();
+             note.setUuid(uuid);
+        }
+        else if(writeMode.equals(AppUtility.EDIT_EXISTING_FILE))
+        {
+            uuid = note.getUuid();
+        }
+
+        String fileName = "file"+uuid;
+
+        File newFile = new File(giveMainFolder(), fileName);
+
+        Log.d("File","File null"+(newFile==null));
+
+        try {
+            fos = new FileOutputStream(newFile);
+
+            Log.d("File","fos null"+(fos==null));
+        }
+        catch (FileNotFoundException e)
+        {
+            Log.d("File","FNF"+(newFile==null));
+        }
+        try {
+            oos = new ObjectOutputStream(fos);
+            Log.d("File","OOS null"+(oos==null));
+
+        } catch (IOException e) {
+
+            Log.d("File","IOEx");
+            e.printStackTrace();
+        }
+        try {
+
+            Log.d("File","before writing");
+            oos.writeObject(note );
+        } catch (IOException e) {
+            Log.d("File","after IOE");
+            e.printStackTrace();
+        }
+
+
+    }
+
+
     public static void deleteFile(String fileName)
     {
 
     }
 
-    public static void editFile(String fileName, Note note)
+    public static void editFile(Note note)
     {
 
     }

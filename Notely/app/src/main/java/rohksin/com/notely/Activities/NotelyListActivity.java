@@ -1,5 +1,6 @@
 package rohksin.com.notely.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -31,6 +32,7 @@ import rohksin.com.notely.Adapters.NotelyListAdapter;
 import rohksin.com.notely.Dummy;
 import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
+import rohksin.com.notely.Utilities.AppUtility;
 import rohksin.com.notely.Utilities.FileUtility;
 
 /**
@@ -76,12 +78,15 @@ public class NotelyListActivity extends AppCompatActivity{
         llm = new LinearLayoutManager(NotelyListActivity.this);
         notelyList.setLayoutManager(llm);
 
+        setUpList();
 
+        /*
 
         List<Note> notes =  FileUtility.getAllNotes();          //Dummy.getDummyNotes();
 
         if(notes==null)
         {
+            ///// Write logic to show no item available
             Log.d("FILE","Empty");
             notes = Dummy.getDummyNotes();
         }
@@ -91,6 +96,7 @@ public class NotelyListActivity extends AppCompatActivity{
         adapter = new NotelyListAdapter(NotelyListActivity.this,notes);
         notelyList.setAdapter(adapter);
 
+        */
 
         //
 
@@ -154,11 +160,46 @@ public class NotelyListActivity extends AppCompatActivity{
         }
         else if(id == R.id.addNote)
         {
-            startActivity(new Intent(NotelyListActivity.this, AddNewNoteActivity.class));
+           // startActivity(new Intent(NotelyListActivity.this, AddNewNoteActivity.class));
+
+            Intent intent = new Intent(NotelyListActivity.this, AddNewNoteActivity.class);
+            intent.setAction(AppUtility.CREATE_NEW_FILE);
+            startActivityForResult(intent, AppUtility.NEW_NOTE_REQ_CODE);
+
             return true;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onActivityResult(int reqCode, int resCode, Intent intent)
+    {
+        if(reqCode == AppUtility.NEW_NOTE_REQ_CODE)
+        {
+            if(resCode== Activity.RESULT_OK)
+            {
+                Toast.makeText(NotelyListActivity.this,"refresh",Toast.LENGTH_SHORT).show();
+                setUpList();
+            }
+            else if(resCode == Activity.RESULT_CANCELED)
+            {
+                Toast.makeText(NotelyListActivity.this,"Not refresh",Toast.LENGTH_SHORT).show();
+            }
+        }
+        else if(reqCode == AppUtility.EDIT_NOTE_REQ_CODE)
+        {
+            if(resCode== Activity.RESULT_OK)
+            {
+                Toast.makeText(NotelyListActivity.this,"refresh",Toast.LENGTH_SHORT).show();
+                setUpList();
+            }
+            else if(resCode == Activity.RESULT_CANCELED)
+            {
+                Toast.makeText(NotelyListActivity.this,"Not refresh",Toast.LENGTH_SHORT).show();
+            }
+        }
+
     }
 
 
@@ -197,6 +238,24 @@ public class NotelyListActivity extends AppCompatActivity{
                 textView.setTextColor(Color.BLUE);
             }
         });
+    }
+
+
+    public void setUpList()
+    {
+        List<Note> notes =  FileUtility.getAllNotes();          //Dummy.getDummyNotes();
+
+        if(notes==null)
+        {
+            ///// Write logic to show no item available
+            Log.d("FILE","Empty");
+            notes = Dummy.getDummyNotes();
+        }
+
+        Log.d("FILE","Not Empty"+notes.size());
+
+        adapter = new NotelyListAdapter(NotelyListActivity.this,notes);
+        notelyList.setAdapter(adapter);
     }
 
 }
