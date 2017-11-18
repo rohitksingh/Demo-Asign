@@ -6,6 +6,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
     }
 
     @Override
-    public void onBindViewHolder(NotelyViewHolder holder, int position) {
+    public void onBindViewHolder(final NotelyViewHolder holder, int position) {
 
         final Note note = notes.get(position);
         holder.title.setText(note.getTitle());
@@ -56,6 +57,20 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
             }
         });
 
+        holder.hearted.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.hearted.setImageResource(R.drawable.heart_pressed);
+            }
+        });
+
+        holder.starred.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                holder.starred.setImageResource(R.drawable.star_pressed);
+            }
+        });
+
     }
 
     @Override
@@ -67,11 +82,16 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
 
         private TextView title;
         private TextView gist;
+        private ImageView starred;
+        private ImageView hearted;
 
         public NotelyViewHolder(View itemView) {
             super(itemView);
             title = (TextView)itemView.findViewById(R.id.title);
             gist = (TextView)itemView.findViewById(R.id.gist);
+            starred = (ImageView)itemView.findViewById(R.id.stared);
+            hearted = (ImageView)itemView.findViewById(R.id.hearted);
+
         }
     }
 

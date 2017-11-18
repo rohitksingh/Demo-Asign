@@ -172,8 +172,15 @@ public class NotelyListActivity extends AppCompatActivity{
     {
         Log.d("ID inside",R.id.favorite+"");
         RelativeLayout allfilters = (RelativeLayout) findViewById(id);
-        TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
+        final TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
         textView.setText(name);
+
+        allfilters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                textView.setTextColor(Color.BLUE);
+            }
+        });
     }
 
 }

@@ -7,11 +7,11 @@
     android:fitsSystemWindows="true"
     >
     <!-- The main content view -->
+
     <LinearLayout
         android:id="@+id/content_frame"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@android:color/holo_green_dark"
         android:orientation="vertical"
         >
 
@@ -22,7 +22,9 @@
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
         android:minHeight="?attr/actionBarSize"
-        android:background="#ffffff" />
+        android:background="@android:color/darker_gray"
+
+        />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/notely_list"
@@ -30,6 +32,7 @@
             android:layout_height="wrap_content"/>
 
 </LinearLayout>
+
     <include layout="@layout/filter_drawer_layout"
         android:id="@+id/filterDrawer"
         android:layout_height="match_parent"
@@ -38,14 +41,4 @@
         android:fitsSystemWindows="true"
         />
 
-    <!--
-    <android.support.design.widget.NavigationView
-        android:id="@+id/navigation"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:layout_gravity="end"
-        app:menu="@menu/notely_menu"
-        android:fitsSystemWindows="true"
-        />
-      -->
     </android.support.v4.widget.DrawerLayout>
