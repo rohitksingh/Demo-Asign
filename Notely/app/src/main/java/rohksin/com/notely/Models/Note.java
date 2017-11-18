@@ -12,6 +12,42 @@ public class Note implements Serializable{
     private String title;
     private String gist;
     private UUID uuid;
+    private boolean isStarred;
+    private boolean isHearted;
+    private boolean isPoem;
+    private boolean isStory;
+
+    public boolean isStarred() {
+        return isStarred;
+    }
+
+    public void setStarred(boolean starred) {
+        isStarred = starred;
+    }
+
+    public boolean isHearted() {
+        return isHearted;
+    }
+
+    public void setHearted(boolean hearted) {
+        isHearted = hearted;
+    }
+
+    public boolean isPoem() {
+        return isPoem;
+    }
+
+    public void setPoem(boolean poem) {
+        isPoem = poem;
+    }
+
+    public boolean isStory() {
+        return isStory;
+    }
+
+    public void setStory(boolean story) {
+        isStory = story;
+    }
 
     public String getTitle() {
         return title;

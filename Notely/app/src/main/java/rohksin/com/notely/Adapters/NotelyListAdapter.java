@@ -17,6 +17,7 @@ import rohksin.com.notely.Activities.NotelyDetailActivity;
 import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
 import rohksin.com.notely.Utilities.AppUtility;
+import rohksin.com.notely.Utilities.FileUtility;
 
 /**
  * Created by Illuminati on 11/17/2017.
@@ -50,13 +51,31 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
         holder.title.setText(note.getTitle());
         holder.gist.setText(note.getGist());
 
+        if(note.isHearted())
+        {
+            holder.hearted.setImageResource(R.drawable.heart_pressed);
+        }
+        else
+        {
+            holder.hearted.setImageResource(R.drawable.heart_unpressed);
+        }
+
+        if(note.isStarred())
+        {
+            holder.starred.setImageResource(R.drawable.star_pressed);
+        }
+        else
+        {
+            holder.starred.setImageResource(R.drawable.star_unpressed);
+        }
+
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, NotelyDetailActivity.class);
                 intent.putExtra(LIST_NOTE,note);
-                //context.startActivity(intent);
                 AppCompatActivity appCompatActivity = (AppCompatActivity)context;
                 appCompatActivity.startActivityForResult(intent, AppUtility.EDIT_NOTE_REQ_CODE);
             }
@@ -65,14 +84,37 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
         holder.hearted.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.hearted.setImageResource(R.drawable.heart_pressed);
+                if(note.isHearted())
+                {
+                    note.setHearted(false);
+                    holder.hearted.setImageResource(R.drawable.heart_unpressed);
+                }
+                else
+                {
+                    note.setHearted(true);
+                    holder.hearted.setImageResource(R.drawable.heart_pressed);
+                }
+
+                FileUtility.createFile(note, AppUtility.EDIT_EXISTING_FILE);
+
             }
         });
 
         holder.starred.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                holder.starred.setImageResource(R.drawable.star_pressed);
+                if(note.isStarred())
+                {
+                    note.setStarred(false);
+                    holder.starred.setImageResource(R.drawable.star_unpressed);
+                }
+                else
+                {
+                    note.setStarred(true);
+                    holder.starred.setImageResource(R.drawable.star_pressed);
+                }
+
+                FileUtility.createFile(note,AppUtility.EDIT_EXISTING_FILE);
             }
         });
 
