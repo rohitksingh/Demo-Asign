@@ -18,7 +18,9 @@
             android:theme="@style/AppTheme.NoActionBar"
             />
         <activity android:name=".Activities.AddNewNoteActivity"/>
-        <activity android:name=".Activities.NotelyDetailActivity"/>
+        <activity android:name=".Activities.NotelyDetailActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity android:name=".Activities.NotelySplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
