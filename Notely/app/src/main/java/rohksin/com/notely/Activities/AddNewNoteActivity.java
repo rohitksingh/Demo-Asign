@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,12 +29,19 @@ public class AddNewNoteActivity extends AppCompatActivity {
     private String WRITE_MODE;
 
 
+    private Toolbar toolbar;
+
+
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_new_note_activity);
+
+        toolbar = (Toolbar)findViewById(R.id.notely_toolbar);
+
+        setSupportActionBar(toolbar);
 
         title = (EditText)findViewById(R.id.title);
         gist = (EditText)findViewById(R.id.gist);
@@ -42,7 +50,7 @@ public class AddNewNoteActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
-        
+
         Intent intent = getIntent();
 
 

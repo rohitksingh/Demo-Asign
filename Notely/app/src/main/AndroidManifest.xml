@@ -17,7 +17,9 @@
         <activity android:name=".Activities.NotelyListActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
-        <activity android:name=".Activities.AddNewNoteActivity"/>
+        <activity android:name=".Activities.AddNewNoteActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            />
         <activity android:name=".Activities.NotelyDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
