@@ -3,6 +3,8 @@ package rohksin.com.notely.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.transition.Slide;
+import android.widget.TextView;
 
 import rohksin.com.notely.R;
 import rohksin.com.notely.Utilities.FileUtility;
@@ -14,24 +16,22 @@ import rohksin.com.notely.Utilities.FilterUtility;
 
 public class NotelySplashActivity extends AppCompatActivity {
 
+    private TextView textView;
+
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notely_splash_activity);
 
-        try {
+        textView = (TextView)findViewById(R.id.mainText);
 
-            FileUtility fileUtility = new FileUtility(NotelySplashActivity.this);
+        Slide slide = new Slide();
 
-            FilterUtility.initialze();
-
-            Thread.sleep(3000);
-            startActivity(new Intent(NotelySplashActivity.this,NotelyListActivity.class));
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
+        FileUtility fileUtility = new FileUtility(NotelySplashActivity.this);
+        FilterUtility.initialze();
+        startActivity(new Intent(NotelySplashActivity.this,NotelyListActivity.class));
+        finish();
 
 
     }

@@ -14,16 +14,20 @@
             android:id="@+id/title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="And then there was none"
+            android:hint="Title"
             android:textSize="36sp"
-
+            android:background="@null"
+            android:textColorHint="#000000"
             />
         <EditText
             android:id="@+id/gist"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="And then there wwas noneakjsdkjskjdkskjdksjkdskjdkjskjdkskdksjkd"
+            android:hint="Click to write Something "
             android:layout_below="@id/title"
+            android:background="@null"
+            android:textColorHint="#000000"
+            android:layout_marginTop="16dp"
             />
         </RelativeLayout>
     </ScrollView>

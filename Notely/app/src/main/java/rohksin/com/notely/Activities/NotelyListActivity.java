@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -55,7 +56,7 @@ public class NotelyListActivity extends AppCompatActivity{
     private boolean filtersApplied ;          // Decides to call whether a filter method or normal execution
 
 
-
+    private boolean doubleTapped = false;
     private float lastTranslate = 0.0f;
 
     @Override
@@ -327,5 +328,34 @@ public class NotelyListActivity extends AppCompatActivity{
         adapter = new NotelyListAdapter(NotelyListActivity.this,notes);
         notelyList.setAdapter(adapter);
     }
+
+
+
+    // Double Tap to Exit
+    @Override
+    public void onBackPressed()
+    {
+
+
+        new Handler().postDelayed(new Runnable() {
+
+            @Override
+            public void run() {
+
+                doubleTapped = false;
+
+            }
+        }, 2000);
+
+        if(doubleTapped)
+        {
+            super.onBackPressed();
+        }
+        else {
+            Toast.makeText(NotelyListActivity.this,"Press again to exit",Toast.LENGTH_SHORT).show();
+            doubleTapped = true;
+        }
+    }
+
 
 }

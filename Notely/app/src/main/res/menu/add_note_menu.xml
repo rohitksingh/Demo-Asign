@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <item android:id="@+id/save"
-        android:title="SAVE"
+    <item android:id="@+id/undo"
+        android:title="Undo"
         android:orderInCategory="100"
         app:showAsAction="always"
         />
-    <item android:id="@+id/undo"
-        android:title="UNDO"
+    <item android:id="@+id/save"
+        android:title="Save"
         android:orderInCategory="100"
         app:showAsAction="always"
         />
