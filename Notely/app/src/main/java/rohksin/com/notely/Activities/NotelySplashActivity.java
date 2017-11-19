@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 
 import rohksin.com.notely.R;
 import rohksin.com.notely.Utilities.FileUtility;
+import rohksin.com.notely.Utilities.FilterUtility;
 
 /**
  * Created by Illuminati on 11/17/2017.
@@ -22,6 +23,8 @@ public class NotelySplashActivity extends AppCompatActivity {
         try {
 
             FileUtility fileUtility = new FileUtility(NotelySplashActivity.this);
+
+            FilterUtility.initialze();
 
             Thread.sleep(3000);
             startActivity(new Intent(NotelySplashActivity.this,NotelyListActivity.class));

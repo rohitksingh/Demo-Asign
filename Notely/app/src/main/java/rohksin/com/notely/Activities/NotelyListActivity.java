@@ -34,6 +34,7 @@ import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
 import rohksin.com.notely.Utilities.AppUtility;
 import rohksin.com.notely.Utilities.FileUtility;
+import rohksin.com.notely.Utilities.FilterUtility;
 
 /**
  * Created by Illuminati on 11/17/2017.
@@ -49,6 +50,9 @@ public class NotelyListActivity extends AppCompatActivity{
     private RecyclerView notelyList;
     private LinearLayoutManager llm;
     private NotelyListAdapter adapter;
+
+
+    private boolean filtersApplied ;          // Decides to call whether a filter method or normal execution
 
 
 
@@ -207,8 +211,10 @@ public class NotelyListActivity extends AppCompatActivity{
     public void setUpFilters()
     {
 
+        setUPCancelFilter();
+
         setUpFilter(R.id.favorite, "Favorite");
-        setUpFilter(R.id.all_filters,"FILTERS");
+        //setUpFilter(R.id.all_filters,"FILTERS");
         setUpFilter(R.id.poem,"Poem");
         setUpFilter(R.id.hearted,"Hearted");
         setUpFilter(R.id.story,"Story");
@@ -218,16 +224,57 @@ public class NotelyListActivity extends AppCompatActivity{
         applyFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                Note filterNote = FilterUtility.getAllEnabledFilter();
+
+                List<Note> filteredList = null;
+
+                if(filtersApplied==true)
+                {
+                    filteredList = FilterUtility.getFilteredList(FileUtility.getAllNotes(),filterNote);
+                }
+                else
+                {
+                    filteredList = FileUtility.getAllNotes();
+                }
+
                 drawerLayout.closeDrawer(Gravity.END);
+                Log.d("FILTER APPLIED",filtersApplied+"");
+                adapter = new NotelyListAdapter(NotelyListActivity.this,filteredList);
+                notelyList.setAdapter(adapter);
+
+
             }
         });
 
 
     }
 
-    public void setUpFilter(int id, String name)
+
+    public void setUPCancelFilter()
     {
-        Log.d("ID inside",R.id.favorite+"");
+        RelativeLayout allfilters = (RelativeLayout) findViewById(R.id.all_filters);
+        final TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
+        textView.setText("FILTERSSS");
+
+        allfilters.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                FilterUtility.initialze();
+                disabledFilter(R.id.poem);
+                disabledFilter(R.id.story);
+                disabledFilter(R.id.hearted);
+                disabledFilter(R.id.favorite);
+                filtersApplied = false;
+            }
+        });
+
+
+    }
+
+    public void setUpFilter(final int id, String name)
+    {
+        Log.d("ID inside",id+"");
         RelativeLayout allfilters = (RelativeLayout) findViewById(id);
         final TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
         textView.setText(name);
@@ -235,9 +282,29 @@ public class NotelyListActivity extends AppCompatActivity{
         allfilters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                textView.setTextColor(Color.BLUE);
+
+                if(!FilterUtility.isEnabled(id)) {
+                    textView.setTextColor(Color.BLUE);
+                    FilterUtility.toggele(id);
+                    filtersApplied = true;
+                }
+                else
+                {
+                    textView.setTextColor(Color.RED);
+                    FilterUtility.toggele(id);
+                    filtersApplied = false;
+                }
             }
         });
+    }
+
+
+    public void disabledFilter(int id)
+    {
+        RelativeLayout allfilters = (RelativeLayout) findViewById(id);
+        final TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
+        textView.setTextColor(Color.RED);
+        // This is disbaled color Change to in Color Source
     }
 
 

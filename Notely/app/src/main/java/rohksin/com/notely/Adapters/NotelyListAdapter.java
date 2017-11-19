@@ -137,7 +137,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
             title = (TextView)itemView.findViewById(R.id.title);
             gist = (TextView)itemView.findViewById(R.id.gist);
             starred = (ImageView)itemView.findViewById(R.id.stared);
-            hearted = (ImageView)itemView.findViewById(R.id.hearted);
+            hearted = (ImageView)itemView.findViewById(R.id.smallhearted);
 
         }
     }

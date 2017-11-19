@@ -65,12 +65,6 @@ public class Note implements Serializable{
         this.gist = gist;
     }
 
-    @Override
-    public String toString()
-    {
-        return title+" \n"+ gist;
-    }
-
     public UUID getUuid() {
         return uuid;
     }
@@ -78,5 +72,14 @@ public class Note implements Serializable{
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
+
+
+
+    @Override
+    public String toString()
+    {
+        return "Hearted"+isHearted()+" Starred"+isStarred()+" Poem"+isPoem()+" Story"+isStory();
+    }
+
 
 }
