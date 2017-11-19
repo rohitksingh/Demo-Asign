@@ -40,6 +40,7 @@
         android:layout_marginTop="16sp"
         android:layout_marginBottom="16sp"
         android:layout_toLeftOf="@id/iconsArea"
+        android:layout_alignParentLeft="true"
         >
         <TextView
             android:id="@+id/title"

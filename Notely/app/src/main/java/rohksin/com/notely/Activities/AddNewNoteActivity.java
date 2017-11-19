@@ -38,9 +38,11 @@ public class AddNewNoteActivity extends AppCompatActivity {
         title = (EditText)findViewById(R.id.title);
         gist = (EditText)findViewById(R.id.gist);
 
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
 
+        
         Intent intent = getIntent();
 
 
@@ -48,6 +50,9 @@ public class AddNewNoteActivity extends AppCompatActivity {
                 note = (Note) intent.getSerializableExtra(AppUtility.NOTE_ITEM);
                 title.setText(note.getTitle());
                 gist.setText(note.getGist());
+                title.setSelection(title.getText().length());
+                gist.setSelection(gist.getText().length());
+
                 WRITE_MODE = AppUtility.EDIT_EXISTING_FILE;
             }
             else if(intent.getAction().equals(AppUtility.CREATE_NEW_FILE)){
