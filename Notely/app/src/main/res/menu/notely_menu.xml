@@ -4,13 +4,13 @@
     <item android:id="@+id/addNote"
         android:title="Filter"
         android:orderInCategory="100"
-        android:icon="@mipmap/ic_launcher_round"
+        android:icon="@drawable/add"
         app:showAsAction="always"
         />
     <item android:id="@+id/filters"
         android:title="Filter"
         android:orderInCategory="100"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/filter_list"
         app:showAsAction="always"
         />
 </menu>

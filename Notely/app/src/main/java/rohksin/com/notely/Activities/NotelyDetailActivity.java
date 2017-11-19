@@ -2,6 +2,7 @@ package rohksin.com.notely.Activities;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -26,7 +27,6 @@ public class NotelyDetailActivity extends AppCompatActivity {
     private CollapsingToolbarLayout collapsingToolbarLayout;
     private Toolbar toolbar;
     private TextView gist;
-
     private Note note;
 
     private boolean isEdited;
@@ -51,8 +51,9 @@ public class NotelyDetailActivity extends AppCompatActivity {
 
         note = (Note)getIntent().getSerializableExtra(NotelyListAdapter.LIST_NOTE);
 
-
         collapsingToolbarLayout.setTitle(note.getTitle());
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
         gist.setText(note.getGist()+",mzx,mz,mx,zm,xm,zm");
         Log.d("NOTE", note.toString());
     }
@@ -130,7 +131,7 @@ public class NotelyDetailActivity extends AppCompatActivity {
     public void updateUI(Note note)
     {
         collapsingToolbarLayout.setTitle(note.getTitle());
-        gist.setText(note.getGist()+",mzx,mz,mx,zm,xm,zm");
+        gist.setText(note.getGist());
     }
 
 

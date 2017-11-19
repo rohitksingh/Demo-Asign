@@ -6,51 +6,7 @@
     >
 
     <LinearLayout
-        android:id="@+id/textArea"
-        android:layout_centerVertical="true"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_marginLeft="16sp"
-        android:layout_marginTop="16sp"
-        android:layout_marginBottom="16sp"
-        >
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="And there were none"
-            android:textSize="25sp"
-            android:textStyle="bold"
-            android:layout_marginTop="2sp"
-            android:layout_marginBottom="2sp"
-            />
-        <TextView
-            android:id="@+id/gist"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Ten little soldiers went to dine"
-            android:textColor="@android:color/darker_gray"
-            android:textSize="16sp"
-            android:layout_marginTop="2sp"
-            android:layout_marginBottom="2sp"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:id="@+id/dateUpdated"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Monday at 6:30 PM"
-            android:textSize="10dp"
-            android:textColor="@android:color/darker_gray"
-            android:layout_marginTop="2sp"
-            android:layout_marginBottom="2sp"
-            android:textStyle="bold"
-            />
-
-    </LinearLayout>
-
-    <LinearLayout
+        android:id="@+id/iconsArea"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
@@ -73,6 +29,60 @@
             android:layout_margin="6dp"
             />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/textArea"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginLeft="16sp"
+        android:layout_marginTop="16sp"
+        android:layout_marginBottom="16sp"
+        android:layout_toLeftOf="@id/iconsArea"
+        >
+        <TextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="And there were none lskdlksldklskldklskldks"
+            android:textSize="25sp"
+            android:textStyle="bold"
+            android:layout_marginTop="2sp"
+            android:layout_marginBottom="2sp"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/gist"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ten little soldiers went to dinelkdlsklkdlskldkls"
+            android:textColor="@android:color/darker_gray"
+            android:textSize="16sp"
+            android:layout_marginTop="2sp"
+            android:layout_marginBottom="2sp"
+            android:textStyle="bold"
+            android:scrollHorizontally="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            />
+        <TextView
+            android:id="@+id/dateUpdated"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Monday at 6:30 PM"
+            android:textSize="10dp"
+            android:textColor="@android:color/darker_gray"
+            android:layout_marginTop="2sp"
+            android:layout_marginBottom="2sp"
+            android:textStyle="bold"
+            />
+
+    </LinearLayout>
+
+
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"

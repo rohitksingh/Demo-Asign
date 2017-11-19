@@ -255,8 +255,8 @@ public class NotelyListActivity extends AppCompatActivity{
     {
         RelativeLayout allfilters = (RelativeLayout) findViewById(R.id.all_filters);
         final TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
-        textView.setText("FILTERSSS");
-
+        textView.setText("FILTER");
+        textView.setTextSize(25);
         allfilters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -275,7 +275,7 @@ public class NotelyListActivity extends AppCompatActivity{
     public void setUpFilter(final int id, String name)
     {
         Log.d("ID inside",id+"");
-        RelativeLayout allfilters = (RelativeLayout) findViewById(id);
+        final RelativeLayout allfilters = (RelativeLayout) findViewById(id);
         final TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
         textView.setText(name);
 
@@ -284,13 +284,15 @@ public class NotelyListActivity extends AppCompatActivity{
             public void onClick(View v) {
 
                 if(!FilterUtility.isEnabled(id)) {
-                    textView.setTextColor(Color.BLUE);
+                    //textView.setTextColor(Color.BLUE);
+                    allfilters.setBackgroundColor(getResources().getColor(R.color.filterEnable));
                     FilterUtility.toggele(id);
                     filtersApplied = true;
                 }
                 else
                 {
-                    textView.setTextColor(Color.RED);
+                    //textView.setTextColor(Color.RED);
+                    allfilters.setBackgroundColor(Color.TRANSPARENT);
                     FilterUtility.toggele(id);
                     filtersApplied = false;
                 }
@@ -303,7 +305,8 @@ public class NotelyListActivity extends AppCompatActivity{
     {
         RelativeLayout allfilters = (RelativeLayout) findViewById(id);
         final TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
-        textView.setTextColor(Color.RED);
+        //textView.setTextColor(Color.WHITE);
+        allfilters.setBackgroundColor(Color.TRANSPARENT);
         // This is disbaled color Change to in Color Source
     }
 
