@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -40,7 +41,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
     @Override
     public NotelyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
-        View view = LayoutInflater.from(context).inflate(R.layout.notely_list_item,parent,false);
+        View view = LayoutInflater.from(context).inflate(R.layout.notely_list_item_delete,parent,false);
         return new NotelyViewHolder(view);
     }
 
@@ -121,6 +122,15 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
 
     }
 
+    public void removeItem(int position)
+    {
+        notes.remove(position);
+        // notify the item removed by position
+        // to perform recycler view delete animations
+        // NOTE: don't call notifyDataSetChanged()
+        notifyItemRemoved(position);
+    }
+
     @Override
     public int getItemCount() {
         return notes.size();
@@ -133,6 +143,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
         private ImageView starred;
         private ImageView hearted;
         private TextView dateUpdated;
+        public RelativeLayout foregroundView;
 
         public NotelyViewHolder(View itemView) {
             super(itemView);
@@ -141,6 +152,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
             starred = (ImageView)itemView.findViewById(R.id.stared);
             hearted = (ImageView)itemView.findViewById(R.id.smallhearted);
             dateUpdated = (TextView)itemView.findViewById(R.id.dateUpdated);
+            foregroundView = (RelativeLayout)itemView.findViewById(R.id.foregound);
 
         }
     }

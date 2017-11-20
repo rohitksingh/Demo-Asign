@@ -12,6 +12,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
+import android.support.v7.widget.helper.ItemTouchHelper;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
@@ -41,7 +42,7 @@ import rohksin.com.notely.Utilities.FilterUtility;
  * Created by Illuminati on 11/17/2017.
  */
 
-public class NotelyListActivity extends AppCompatActivity{
+public class NotelyListActivity extends AppCompatActivity implements RecyclerItemTouchHelper.RecyclerItemTouchHelperListener{
 
     private DrawerLayout drawerLayout;
     private ActionBarDrawerToggle drawerToggle;
@@ -82,6 +83,8 @@ public class NotelyListActivity extends AppCompatActivity{
         notelyList = (RecyclerView)findViewById(R.id.notely_list);
         llm = new LinearLayoutManager(NotelyListActivity.this);
         notelyList.setLayoutManager(llm);
+        ItemTouchHelper.SimpleCallback itemTouchHelperCallback = new RecyclerItemTouchHelper(0, ItemTouchHelper.LEFT, this);
+        new ItemTouchHelper(itemTouchHelperCallback).attachToRecyclerView(notelyList);
 
         setUpList();
 
@@ -327,6 +330,7 @@ public class NotelyListActivity extends AppCompatActivity{
 
         adapter = new NotelyListAdapter(NotelyListActivity.this,notes);
         notelyList.setAdapter(adapter);
+
     }
 
 
@@ -358,4 +362,8 @@ public class NotelyListActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction, int position) {
+        adapter.removeItem(position);
+    }
 }
