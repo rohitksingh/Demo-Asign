@@ -4,11 +4,12 @@
     android:layout_height="match_parent">
     <TextView
         android:id="@+id/mainText"
-        android:text="NOTELY"
+        android:text="Notely"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:gravity="center"
-        android:textSize="30dp"
+        android:textSize="40sp"
         android:layout_centerInParent="true"
+        android:textStyle="bold"
         />
 </RelativeLayout>

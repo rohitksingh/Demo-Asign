@@ -23,7 +23,9 @@
         <activity android:name=".Activities.NotelyDetailActivity"
             android:theme="@style/AppTheme.NoActionBar"
             />
-        <activity android:name=".Activities.NotelySplashActivity">
+        <activity android:name=".Activities.NotelySplashActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
