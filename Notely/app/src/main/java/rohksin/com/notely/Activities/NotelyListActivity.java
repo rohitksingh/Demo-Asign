@@ -56,6 +56,7 @@ public class NotelyListActivity extends AppCompatActivity implements RecyclerIte
 
     private boolean filtersApplied ;          // Decides to call whether a filter method or normal execution
 
+    private int filterEnabled =0;
 
     private boolean doubleTapped = false;
     private float lastTranslate = 0.0f;
@@ -233,12 +234,17 @@ public class NotelyListActivity extends AppCompatActivity implements RecyclerIte
 
                 List<Note> filteredList = null;
 
-                if(filtersApplied==true)
+                Log.d("DUPLI","1");
+
+
+                if(filterEnabled!=0)
                 {
+                    Log.d("DUPLI","2");
                     filteredList = FilterUtility.getFilteredList(FileUtility.getAllNotes(),filterNote);
                 }
                 else
                 {
+                    Log.d("DUPLI","3");
                     filteredList = FileUtility.getAllNotes();
                 }
 
@@ -270,6 +276,7 @@ public class NotelyListActivity extends AppCompatActivity implements RecyclerIte
                 disabledFilter(R.id.hearted);
                 disabledFilter(R.id.favorite);
                 filtersApplied = false;
+                filterEnabled =0;                // resetting
             }
         });
 
@@ -292,6 +299,7 @@ public class NotelyListActivity extends AppCompatActivity implements RecyclerIte
                     allfilters.setBackgroundColor(getResources().getColor(R.color.filterEnable));
                     FilterUtility.toggele(id);
                     filtersApplied = true;
+                    filterEnabled++;
                 }
                 else
                 {
@@ -299,6 +307,7 @@ public class NotelyListActivity extends AppCompatActivity implements RecyclerIte
                     allfilters.setBackgroundColor(Color.TRANSPARENT);
                     FilterUtility.toggele(id);
                     filtersApplied = false;
+                    filterEnabled--;
                 }
             }
         });
