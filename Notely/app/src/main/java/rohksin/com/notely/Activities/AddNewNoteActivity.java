@@ -54,18 +54,24 @@ public class AddNewNoteActivity extends AppCompatActivity {
         Intent intent = getIntent();
 
 
-            if (intent.getAction().equals(AppUtility.NOTE_ACTION)) {
-                note = (Note) intent.getSerializableExtra(AppUtility.NOTE_ITEM);
-                title.setText(note.getTitle());
-                gist.setText(note.getGist());
-                title.setSelection(title.getText().length());
-                gist.setSelection(gist.getText().length());
+        if (intent.getAction().equals(AppUtility.NOTE_ACTION)) {
 
-                WRITE_MODE = AppUtility.EDIT_EXISTING_FILE;
-            }
-            else if(intent.getAction().equals(AppUtility.CREATE_NEW_FILE)){
-                WRITE_MODE = AppUtility.CREATE_NEW_FILE;
-            }
+            Log.d("MODE","EDIT MODE");
+
+            note = (Note) intent.getSerializableExtra(AppUtility.NOTE_ITEM);
+            title.setText(note.getTitle());
+            gist.setText(note.getGist());
+            title.setSelection(title.getText().length());
+            gist.setSelection(gist.getText().length());
+            Log.d("GIZ","XXcc: "+note);
+            WRITE_MODE = AppUtility.EDIT_EXISTING_FILE;
+        }
+        else if(intent.getAction().equals(AppUtility.CREATE_NEW_FILE)){
+            WRITE_MODE = AppUtility.CREATE_NEW_FILE;
+            note = new Note();                                //<----- This fixed the bug
+            Log.d("MODE","New File MODE");
+
+        }
 
 
 
@@ -93,7 +99,7 @@ public class AddNewNoteActivity extends AppCompatActivity {
         {
             Toast.makeText(AddNewNoteActivity.this,"Save",Toast.LENGTH_SHORT).show();
 
-            note = new Note();
+            //note = new Note(); /////<------- This is the culprit FOUND IT
 
             note.setTitle(title.getText()+"");
             note.setGist(gist.getText()+"");

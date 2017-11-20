@@ -13,6 +13,7 @@ public class Note implements Serializable{
     private String gist;
     private UUID uuid;
     private String lastUpdatedTime;
+    private String filePath;
     private boolean isStarred;
     private boolean isHearted;
     private boolean isPoem;
@@ -83,12 +84,23 @@ public class Note implements Serializable{
     }
 
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
 
 
     @Override
     public String toString()
     {
-        return "Hearted"+isHearted()+" Starred"+isStarred()+" Poem"+isPoem()+" Story"+isStory();
+        //return "Hearted"+isHearted()+" Starred"+isStarred()+" Poem"+isPoem()+" Story"+isStory();
+
+        // return "File Path = "+filePath;
+
+        return "UUID: "+uuid;
     }
 
 

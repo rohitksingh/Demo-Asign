@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -53,6 +54,8 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
         holder.gist.setText(note.getGist());
         holder.dateUpdated.setText(note.getLastUpdatedTime());
 
+        Log.d("GIZ","XX: "+note);
+
         if(note.isHearted())
         {
             holder.hearted.setImageResource(R.drawable.heart_pressed);
@@ -77,6 +80,9 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, NotelyDetailActivity.class);
+
+                Log.d("GIZ","XXZ: "+note);
+
                 intent.putExtra(LIST_NOTE,note);
                 AppCompatActivity appCompatActivity = (AppCompatActivity)context;
                 appCompatActivity.startActivityForResult(intent, AppUtility.EDIT_NOTE_REQ_CODE);
@@ -124,7 +130,13 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
 
     public void removeItem(int position)
     {
+
+        Note note = notes.get(position);
+
+        FileUtility.deleteNote(note.getFilePath());
         notes.remove(position);
+
+
         // notify the item removed by position
         // to perform recycler view delete animations
         // NOTE: don't call notifyDataSetChanged()
