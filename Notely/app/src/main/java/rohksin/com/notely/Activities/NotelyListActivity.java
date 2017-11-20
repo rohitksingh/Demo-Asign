@@ -20,6 +20,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.animation.TranslateAnimation;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -265,8 +266,13 @@ public class NotelyListActivity extends AppCompatActivity implements RecyclerIte
     {
         RelativeLayout allfilters = (RelativeLayout) findViewById(R.id.all_filters);
         final TextView textView = (TextView)allfilters.findViewById(R.id.filterText);
-        textView.setText("FILTER");
-        textView.setTextSize(25);
+        textView.setText("CLEAR FILTER");
+        textView.setGravity(Gravity.CENTER);
+        textView.setTextSize(20);
+        ImageView imageView = (ImageView)allfilters.findViewById(R.id.filterIcon);
+        imageView.setImageResource(R.drawable.clear);
+        imageView.setVisibility(View.GONE);
+
         allfilters.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
