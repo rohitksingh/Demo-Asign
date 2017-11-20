@@ -50,6 +50,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
         final Note note = notes.get(position);
         holder.title.setText(note.getTitle());
         holder.gist.setText(note.getGist());
+        holder.dateUpdated.setText(note.getLastUpdatedTime());
 
         if(note.isHearted())
         {
@@ -131,6 +132,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
         private TextView gist;
         private ImageView starred;
         private ImageView hearted;
+        private TextView dateUpdated;
 
         public NotelyViewHolder(View itemView) {
             super(itemView);
@@ -138,6 +140,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
             gist = (TextView)itemView.findViewById(R.id.gist);
             starred = (ImageView)itemView.findViewById(R.id.stared);
             hearted = (ImageView)itemView.findViewById(R.id.smallhearted);
+            dateUpdated = (TextView)itemView.findViewById(R.id.dateUpdated);
 
         }
     }

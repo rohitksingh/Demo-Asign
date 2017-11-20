@@ -102,6 +102,8 @@ public class FileUtility {
             uuid = note.getUuid();
         }
 
+        note.setLastUpdatedTime(AppUtility.getCurrentTime());
+
         String fileName = "file"+uuid;
 
         File newFile = new File(giveMainFolder(), fileName);

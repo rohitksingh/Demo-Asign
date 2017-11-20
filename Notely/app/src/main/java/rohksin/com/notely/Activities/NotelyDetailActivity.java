@@ -54,7 +54,7 @@ public class NotelyDetailActivity extends AppCompatActivity {
         collapsingToolbarLayout.setTitle(note.getTitle());
         collapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);
         collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
-        gist.setText(note.getGist()+",mzx,mz,mx,zm,xm,zm");
+        gist.setText(note.getGist());
         Log.d("NOTE", note.toString());
     }
 

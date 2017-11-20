@@ -12,6 +12,7 @@ public class Note implements Serializable{
     private String title;
     private String gist;
     private UUID uuid;
+    private String lastUpdatedTime;
     private boolean isStarred;
     private boolean isHearted;
     private boolean isPoem;
@@ -72,6 +73,15 @@ public class Note implements Serializable{
     public void setUuid(UUID uuid) {
         this.uuid = uuid;
     }
+
+    public String getLastUpdatedTime() {
+        return lastUpdatedTime;
+    }
+
+    public void setLastUpdatedTime(String lastUpdatedTime) {
+        this.lastUpdatedTime = lastUpdatedTime;
+    }
+
 
 
 
