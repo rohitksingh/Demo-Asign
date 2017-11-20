@@ -224,7 +224,7 @@ public class NotelyListActivity extends AppCompatActivity implements RecyclerIte
         setUpFilter(R.id.hearted,"Hearted");
         setUpFilter(R.id.story,"Story");
 
-        Button applyFilterButton = (Button)findViewById(R.id.applyFilter);
+        TextView applyFilterButton = (TextView) findViewById(R.id.applyFilter);
 
         applyFilterButton.setOnClickListener(new View.OnClickListener() {
             @Override

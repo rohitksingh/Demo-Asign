@@ -33,13 +33,20 @@
             android:id="@+id/poem"
             />
     </LinearLayout>
-    <Button
+    <TextView
         android:id="@+id/applyFilter"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="APPLY"
-        android:layout_marginBottom="20dp"
+        android:text="  APPLY  "
+        android:layout_marginBottom="40dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
+        android:background="@drawable/filter_button"
+        android:paddingTop="10sp"
+        android:paddingBottom="10sp"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:layout_marginLeft="16sp"
+        android:layout_marginRight="16sp"
         />
 </RelativeLayout>
