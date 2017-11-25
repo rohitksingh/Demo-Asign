@@ -32,12 +32,20 @@
 
 </LinearLayout>
 
-    <include layout="@layout/filter_drawer_layout"
-        android:id="@+id/filterDrawer"
-        android:layout_height="match_parent"
+    <android.support.design.widget.NavigationView
+        android:id="@+id/nav_view"
         android:layout_width="150dp"
-        android:layout_gravity="end"
+        android:layout_height="match_parent"
         android:fitsSystemWindows="true"
-        />
+        android:layout_gravity="end"
+        >
+        <include layout="@layout/filter_drawer_layout"
+            android:id="@+id/filterDrawer"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_gravity="end"
+            />
+    </android.support.design.widget.NavigationView>
+
 
     </android.support.v4.widget.DrawerLayout>

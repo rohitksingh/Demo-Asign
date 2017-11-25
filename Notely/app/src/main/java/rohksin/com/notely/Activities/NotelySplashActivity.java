@@ -4,10 +4,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
-import android.transition.Slide;
 import android.widget.TextView;
-import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import rohksin.com.notely.R;
 import rohksin.com.notely.Utilities.FileUtility;
 import rohksin.com.notely.Utilities.FilterUtility;
@@ -18,20 +17,27 @@ import rohksin.com.notely.Utilities.FilterUtility;
 
 public class NotelySplashActivity extends AppCompatActivity {
 
-    private TextView textView;
+    @BindView(R.id.mainText)
+    TextView textView;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notely_splash_activity);
+        ButterKnife.bind(this);
+        setUpUi();
+    }
 
-        textView = (TextView)findViewById(R.id.mainText);
+    //*********************************************************************
+    // private Methods
+    //*********************************************************************
+
+    private void setUpUi()
+    {
         textView.setText("Notely");
-
         FileUtility fileUtility = new FileUtility(NotelySplashActivity.this);
         FilterUtility.initialze();
-
         // Splash time
         new Handler().postDelayed(new Runnable() {
 
@@ -43,8 +49,5 @@ public class NotelySplashActivity extends AppCompatActivity {
 
             }
         }, 2000);
-
-
-
     }
 }

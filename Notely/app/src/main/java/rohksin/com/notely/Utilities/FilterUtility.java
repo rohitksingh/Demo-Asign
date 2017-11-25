@@ -1,12 +1,8 @@
 package rohksin.com.notely.Utilities;
 
-import android.content.Intent;
-import android.util.Log;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -39,7 +35,6 @@ public class FilterUtility {
 
     public static void toggele(int id)
     {
-        Log.d("ID toggle",id+"");
         if(hashMap.get(id))
         {
             hashMap.put(id,false);
@@ -53,8 +48,6 @@ public class FilterUtility {
     public static Note getAllEnabledFilter()
     {
         Note filterNote = new Note();
-
-        Log.d("WHAt",(filterNote==null)+""+hashMap.size());
 
         Set<Integer> keySet= hashMap.keySet();
         Iterator<Integer> iterator = keySet.iterator();
@@ -72,31 +65,21 @@ public class FilterUtility {
     {
         List<Note> filterdList = new ArrayList<Note>();
 
-
-        Log.d("FILTERS",filter+"");
-
         for(Note note: notes)
         {
             if(filter.isStarred()==note.isStarred()&& filter.isHearted()==note.isHearted())
             {
                 filterdList.add(note);
-                Log.d("ISFILTER","IF");
             }
             else
             {
-                Log.d("ISFILTER","ELSE");
+
             }
         }
-
-
 
         return filterdList;
 
     }
-
-
-
-
 
 
 

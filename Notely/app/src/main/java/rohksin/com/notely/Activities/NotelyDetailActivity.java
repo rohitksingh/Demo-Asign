@@ -7,12 +7,12 @@ import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import rohksin.com.notely.Adapters.NotelyListAdapter;
 import rohksin.com.notely.Models.Note;
 import rohksin.com.notely.R;
@@ -24,11 +24,16 @@ import rohksin.com.notely.Utilities.AppUtility;
 
 public class NotelyDetailActivity extends AppCompatActivity {
 
-    private CollapsingToolbarLayout collapsingToolbarLayout;
-    private Toolbar toolbar;
-    private TextView gist;
-    private Note note;
+    @BindView(R.id.title)
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
+    @BindView(R.id.mainGist)
+    TextView gist;
+
+    private Note note;
     private boolean isEdited;
 
     @Override
@@ -36,29 +41,14 @@ public class NotelyDetailActivity extends AppCompatActivity {
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.notely_detail_actiivty);
-
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setDisplayShowHomeEnabled(true);
-
-
-        gist = (TextView)findViewById(R.id.mainGist);
-
-        collapsingToolbarLayout = (CollapsingToolbarLayout)findViewById(R.id.title);
-
-        note = (Note)getIntent().getSerializableExtra(NotelyListAdapter.LIST_NOTE);
-
-        collapsingToolbarLayout.setTitle(note.getTitle());
-        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);
-        collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
-        gist.setText(note.getGist());
-        Log.d("NOTE", note.toString());
+        ButterKnife.bind(this);
+        setUpUi();
     }
 
 
+    //*********************************************************************
+    // Menu related
+    //*********************************************************************
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu)
@@ -71,34 +61,38 @@ public class NotelyDetailActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item)
     {
 
-        int id = item.getItemId();
-
-
-        if(id == android.R.id.home)
+        switch (item.getItemId())
         {
-            if(isEdited)
-            {
-                setResult(Activity.RESULT_OK);
-            }
-            else
-            {
-                setResult(Activity.RESULT_CANCELED);
-            }
-            onBackPressed();
+            case android.R.id.home:
+                if(isEdited)
+                {
+                    setResult(Activity.RESULT_OK);
+                }
+                else
+                {
+                    setResult(Activity.RESULT_CANCELED);
+                }
+                onBackPressed();
+                return true;
+
+            case R.id.edit:
+                Intent intent = new Intent(NotelyDetailActivity.this, AddNewNoteActivity.class);
+                intent.setAction(AppUtility.NOTE_ACTION);
+                intent.putExtra(AppUtility.NOTE_ITEM,note);
+                startActivityForResult(intent,AppUtility.EDIT_NOTE_REQ_CODE);
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
 
         }
-        else if(id == R.id.edit)
-        {
-            Intent intent = new Intent(NotelyDetailActivity.this, AddNewNoteActivity.class);
-            intent.setAction(AppUtility.NOTE_ACTION);
-            intent.putExtra(AppUtility.NOTE_ITEM,note);
-            //startActivity(intent);
-            startActivityForResult(intent,AppUtility.EDIT_NOTE_REQ_CODE);
-        }
 
-
-        return super.onOptionsItemSelected(item);
     }
+
+
+    //*********************************************************************
+    // System callback methods
+    //*********************************************************************
 
 
     @Override
@@ -108,33 +102,16 @@ public class NotelyDetailActivity extends AppCompatActivity {
         {
             if(resCode == Activity.RESULT_OK)
             {
-                Toast.makeText(NotelyDetailActivity.this,"Edites",Toast.LENGTH_SHORT).show();
-
-                Note note = (Note)intent.getSerializableExtra(AppUtility.NOTE_ITEM);
-
-                Log.d("NOTE IS NULL",(note==null)+"");
-
+                note = (Note)intent.getSerializableExtra(AppUtility.NOTE_ITEM);
                 isEdited = true;
-
-                // Get Node to update UI
                 updateUI(note);
             }
             else if(resCode == Activity.RESULT_CANCELED)
             {
-                Toast.makeText(NotelyDetailActivity.this,"Not edites",Toast.LENGTH_SHORT).show();
+                Toast.makeText(NotelyDetailActivity.this,"Not edits",Toast.LENGTH_SHORT).show();
             }
         }
     }
-
-
-
-    public void updateUI(Note note)
-    {
-        collapsingToolbarLayout.setTitle(note.getTitle());
-        gist.setText(note.getGist());
-    }
-
-
 
 
     @Override
@@ -149,12 +126,30 @@ public class NotelyDetailActivity extends AppCompatActivity {
             setResult(Activity.RESULT_CANCELED);
         }
         finish();
-
         super.onBackPressed();
     }
 
 
+    //*********************************************************************
+    // Private methods
+    //*********************************************************************
 
+    private void updateUI(Note note)
+    {
+        collapsingToolbarLayout.setTitle(note.getTitle());
+        gist.setText(note.getGist());
+    }
 
+    private void setUpUi()
+    {
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+        collapsingToolbarLayout.setCollapsedTitleTextColor(Color.BLACK);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.BLACK);
+        note = (Note)getIntent().getSerializableExtra(NotelyListAdapter.LIST_NOTE);
+        updateUI(note);
+
+    }
 
 }

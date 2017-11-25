@@ -29,9 +29,7 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
 
     private Context context;
     private List<Note> notes;
-
     public static final String LIST_NOTE = "rohksin.com.notely.Adapters.LIST_NOTE";
-
 
     public NotelyListAdapter(Context context, List<Note> notes)
     {
@@ -74,15 +72,11 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
             holder.starred.setImageResource(R.drawable.star_unpressed);
         }
 
-
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 Intent intent = new Intent(context, NotelyDetailActivity.class);
-
-                Log.d("GIZ","XXZ: "+note);
-
                 intent.putExtra(LIST_NOTE,note);
                 AppCompatActivity appCompatActivity = (AppCompatActivity)context;
                 appCompatActivity.startActivityForResult(intent, AppUtility.EDIT_NOTE_REQ_CODE);
@@ -128,24 +122,18 @@ public class NotelyListAdapter extends RecyclerView.Adapter<NotelyListAdapter.No
 
     }
 
-    public void removeItem(int position)
-    {
-
-        Note note = notes.get(position);
-
-        FileUtility.deleteNote(note.getFilePath());
-        notes.remove(position);
-
-
-        // notify the item removed by position
-        // to perform recycler view delete animations
-        // NOTE: don't call notifyDataSetChanged()
-        notifyItemRemoved(position);
-    }
 
     @Override
     public int getItemCount() {
         return notes.size();
+    }
+
+    public void removeItem(int position)
+    {
+        Note note = notes.get(position);
+        FileUtility.deleteNote(note.getFilePath());
+        notes.remove(position);
+        notifyItemRemoved(position);
     }
 
     public class NotelyViewHolder extends RecyclerView.ViewHolder{
