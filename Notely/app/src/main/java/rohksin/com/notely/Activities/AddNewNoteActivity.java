@@ -96,12 +96,13 @@ public class AddNewNoteActivity extends AppCompatActivity {
     // Private methods
     //*********************************************************************
 
-    public void setUpUI()
+    private void setUpUI()
     {
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
+        toolbar.setPadding(0,getStatusBarHeight(),0,0);
 
         Intent intent = getIntent();
         if (intent.getAction().equals(AppUtility.NOTE_ACTION)) {
@@ -118,6 +119,17 @@ public class AddNewNoteActivity extends AppCompatActivity {
             note = new Note();//<----- This fixed the bug
         }
         oldNote = note;
+    }
+
+    private int getStatusBarHeight()
+    {
+        int height = 0;
+        int resourceId = getResources().getIdentifier("status_bar_height", "dimen", "android");
+        if(resourceId>0)
+        {
+            height = getResources().getDimensionPixelSize(resourceId);
+        }
+        return height;
     }
 
 }

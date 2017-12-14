@@ -8,6 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
         <item name="android:actionMenuTextColor">#000000</item>
         <item name="android:homeAsUpIndicator">@drawable/back_arrow</item>
+        <item name="android:windowTranslucentStatus">true</item>
 
     </style>
 
